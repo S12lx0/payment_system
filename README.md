@@ -91,7 +91,7 @@ payment-system/
 ## 📝 详细文档
 
 完整的设计思路、架构图、代码逐行解析、Postman 测试截图、Linux 加固与 Docker 部署教程，请移步我的博客：  
-👉 **[https://s12lx0.github.io/](https://s121x0.github.io/)**
+👉 **[https://s12lx0.github.io/](https://s12lx0.github.io/)**
 
 ---
 
