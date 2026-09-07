@@ -36,7 +36,7 @@
 - **账户模块**：余额充值、查询
 - **支付模块**：护栏优先 → AI 辅助 → 扣款下单（事务保证一致性）
 - **安全防御**：
-  - XSS 过滤器（请求参数转义）
+  - XSS 过滤（全局Json反序列化，对展示型文本请求参数转义）
   - MyBatis `#{}`预编译防 SQL 注入
   - 手机号 JSON 序列化脱敏（`@JsonSerialize`）
   - IP 级别接口限流（Guava RateLimiter，5 次/秒）
@@ -70,8 +70,7 @@ payment-system/
 │   │   └── OrderCountService.java  # Redis 频次计数
 │   ├── mapper/          # MyBatis 数据访问（预编译防注入）
 │   ├── entity/          # 实体类（含手机号脱敏注解）
-│   ├── filter/          # XSS 过滤器
-│   └── config/          # JWT 拦截器、限流拦截器、脱敏器
+│   └── config/          # JWT 拦截器、限流拦截器、脱敏器、XSS过滤
 ├── src/main/resources/
 │   ├── application.properties       # 本地配置（含敏感信息不提交）
 │   └── application-example.properties  # 配置模板
