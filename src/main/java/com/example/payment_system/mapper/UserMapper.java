@@ -17,12 +17,12 @@ public interface UserMapper {
 
     @Insert("INSERT INTO user(username, password, phone) VALUES(#{username}, #{password}, #{phone})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    int insert(User user);//id自增
+    int insert(User user);
 
     @Select("SELECT * FROM user WHERE phone = #{phone}")
     User findByPhone(String phone);
 
-    //高并发下的安全扣款
+    //高并发下的安全扣款，扣减后判断，Mysql行锁id
     @Update("UPDATE user SET balance = balance - #{amount} WHERE id = #{id} AND balance >= #{amount}")
     int deductBalance(@Param("id") Long id, @Param("amount") BigDecimal amount);
 

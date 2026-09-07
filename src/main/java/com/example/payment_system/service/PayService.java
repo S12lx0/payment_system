@@ -29,27 +29,20 @@ public class PayService {
         if (user == null) {
             return "user_not_found";
         }
-
-
         if (user.getBalance().compareTo(amount) < 0) {
             return "insufficient_balance";
         }
-
 
         int affected = userMapper.deductBalance(userId, amount);
         if (affected == 0) {
             return "insufficient_balance";
         }
-
-
         Order order = new Order();
         order.setUserId(userId.intValue());
         order.setAmount(amount);
         order.setStatus("SUCCESS");
         order.setDescription(description);
         orderMapper.insert(order);
-
-        //记录下单次数
         orderCountService.recordOrder(userId);
         return "success";
     }

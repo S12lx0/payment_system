@@ -35,14 +35,14 @@ public class PayController {
         String resultMsg = "";
         String status = "SUCCESS";
         try {
-            // 1. 获取Agent下发的指令
+            // 1. 获取AI下发的指令
             String action = riskAgentService.getAgentAction(
                     request.getUserId(),
                     request.getAmount(),
                     request.getIp()
             );
 
-            // 2. Java后端根据Agent的指令，执行对应的本地工具
+            // 2. Java后端根据AI的指令，执行对应的本地工具
             switch (action) {
                 case "BLOCK":
                     resultMsg = "支付被安全护栏拦截：触发Agent风控策略，交易已终止";

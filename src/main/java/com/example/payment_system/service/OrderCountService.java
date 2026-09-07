@@ -16,7 +16,6 @@ public class OrderCountService {
 
     public void recordOrder(Long userId) {
         String key = KEY_PREFIX + userId;
-        // 自增1
         redisTemplate.opsForValue().increment(key);
         // 设置过期时间为1小时（3600秒）
         redisTemplate.expire(key, 3600, TimeUnit.SECONDS);

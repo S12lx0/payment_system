@@ -69,9 +69,9 @@ public class RiskAgentService {
         return String.format(
                 "你是一个支付风控Agent。请根据规则输出JSON指令，不要包含任何其他文字。\n" +
                         "规则：\n" +
-                        "1. 金额>=5000或IP非192.168.1.* → {\"action\":\"BLOCK\", \"reason\":\"大额/异常IP\"}\n" +
-                        "2. 金额>=2000且近1小时下单>=5次 → {\"action\":\"SMS_VERIFY\", \"reason\":\"高频交易\"}\n" +
-                        "3. 其他 → {\"action\":\"ALLOW\", \"reason\":\"正常交易\"}\n" +
+                        "1. 时间异常：如果交易时间在凌晨 00:00-05:00，且金额 > 1500，输出 {\"action\":\"SMS_VERIFY\", \"reason\":\"深夜大额\"}\n" +
+                        "2. 金额敏感：如果金额是 4999、3999、2999 这类“刚好低于5000”的试探性数字，输出 {\"action\":\"SMS_VERIFY\", \"reason\":\"试探性大额\"}\n" +
+                        "3. 正常情况：其他所有情况，输出 {\"action\":\"ALLOW\", \"reason\":\"正常\"}\n" +
                         "当前交易：用户%d，金额%.2f元，IP=%s，近1小时下单%d次\n" +
                         "只返回JSON：",
                 userId, amount, ip, count
